@@ -14,9 +14,7 @@ export default function ({ navigation }: AccountTabStackScreenProps<"SignUpScree
   }
 
   function createAccount() {
-    if (!username || !password || password != confirmPassword) {
-      alert("All fields are required.")
-    }
+    alert("Create account");
   }
 
   return (
@@ -34,6 +32,7 @@ export default function ({ navigation }: AccountTabStackScreenProps<"SignUpScree
         value={password}
         placeholder="Password"
         secureTextEntry={true}
+        textContentType="newPassword"
       />
       <TextInput
         style={styles.input}
@@ -41,6 +40,7 @@ export default function ({ navigation }: AccountTabStackScreenProps<"SignUpScree
         value={confirmPassword}
         placeholder="Confirm password"
         secureTextEntry={true}
+        textContentType="newPassword"
       />
       <Button
         onPress={createAccount}
