@@ -20,13 +20,21 @@ export type RootStackParamList = {
   NotFound: undefined;
 };
 
-export type RootStackScreenProps<Screen extends keyof RootStackParamList> = NativeStackScreenProps<RootStackParamList,
-  Screen>;
+export type RootStackScreenProps<Screen extends keyof RootStackParamList>
+  = NativeStackScreenProps<RootStackParamList, Screen>;
 
 export type RootTabParamList = {
   TabOne: undefined;
-  TabTwo: undefined;
+  AccountTab: undefined;
 };
 
 export type RootTabScreenProps<Screen extends keyof RootTabParamList> = CompositeScreenProps<BottomTabScreenProps<RootTabParamList, Screen>,
   NativeStackScreenProps<RootStackParamList>>;
+
+export type AccountTabStackParamList = {
+  SignUpScreen: undefined;
+  SignInScreen: undefined;
+  AccountScreen: undefined;
+}
+
+export type AccountTabStackScreenProps<Screen extends keyof AccountTabStackParamList> = NativeStackScreenProps<AccountTabStackParamList, Screen>
