@@ -5,11 +5,6 @@ from typing import Optional
 auth = Blueprint("auth", __name__, url_prefix="/auth")
 
 
-@auth.route("/")
-def get_auth():
-  return jsonify({"message": "hello from /auth"})
-
-
 @auth.route("/signup", methods=["POST"])
 def signup():
   required_fields = {"username", "password"}
