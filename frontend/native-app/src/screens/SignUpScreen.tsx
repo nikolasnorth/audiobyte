@@ -1,24 +1,54 @@
-import React from "react";
-import { StyleSheet } from "react-native";
+import React, { useState } from "react";
+import { Button, StyleSheet } from "react-native";
 
-import { View, Text } from "../components/Themed";
+import { View, Text, TextInput } from "../components/Themed";
 import { AccountTabStackScreenProps } from "../types";
 
 export default function ({ navigation }: AccountTabStackScreenProps<"SignUpScreen">) {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
 
   function goToSignInScreen() {
-    if (navigation) {
-      alert("navigation is ready");
-    } else {
-      alert("navigation was not found");
+    navigation.navigate("SignInScreen");
+  }
+
+  function createAccount() {
+    if (!username || !password || password != confirmPassword) {
+      alert("All fields are required.")
     }
   }
 
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Create Account</Text>
-      <Text>Already have an account? <Text onPress={goToSignInScreen}>Sign in.</Text>
-      </Text>
+      <TextInput
+        style={styles.input}
+        onChangeText={text => setUsername(text)}
+        value={username}
+        placeholder="Username"
+      />
+      <TextInput
+        style={styles.input}
+        onChangeText={text => setPassword(text)}
+        value={password}
+        placeholder="Password"
+        secureTextEntry={true}
+      />
+      <TextInput
+        style={styles.input}
+        onChangeText={text => setConfirmPassword(text)}
+        value={confirmPassword}
+        placeholder="Confirm password"
+        secureTextEntry={true}
+      />
+      <Button
+        onPress={createAccount}
+        title="Create Account"
+        accessibilityLabel="Create an account with this button."
+        disabled={!username || !password || password != confirmPassword}
+      />
+      <Text>Already have an account? <Text onPress={goToSignInScreen}>Sign in.</Text></Text>
     </View>
   );
 }
@@ -32,5 +62,14 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 20,
     fontWeight: "bold",
+  },
+  input: {
+    height: 40,
+    width: "80%",
+    padding: 10,
+    margin: 5,
+    borderRadius: 8,
+    borderColor: "gray",
+    borderWidth: 1,
   },
 });
