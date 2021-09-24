@@ -7,7 +7,7 @@ import { Text, View } from "../components/Themed";
 import { AccountTabStackScreenProps } from "../types";
 
 export default function AccountScreen({ navigation }: AccountTabStackScreenProps<"AccountScreen">) {
-  const [isSignedIn] = useState(true);
+  const [isSignedIn] = useState(false);
 
   function goToSignUpScreen() {
     navigation.navigate("SignUpScreen")
@@ -20,20 +20,20 @@ export default function AccountScreen({ navigation }: AccountTabStackScreenProps
   if (isSignedIn) {
     return (
       <View style={styles.container}>
+        <Text style={styles.title}>Account</Text>
+        <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)"/>
+        <EditScreenInfo path="/screens/TabTwoScreen.tsx"/>
+      </View>
+    );
+  } else {
+    return (
+      <View style={styles.container}>
         <Button
           onPress={goToSignUpScreen}
           title="Create Account"
           accessibilityLabel="Create an account with this button."
         />
         <Text>Already have an account? <Text onPress={goToSignInScreen}>Sign in.</Text></Text>
-      </View>
-    );
-  } else {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.title}>Account</Text>
-        <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)"/>
-        <EditScreenInfo path="/screens/TabTwoScreen.tsx"/>
       </View>
     );
   }
