@@ -38,3 +38,8 @@ export type AccountTabStackParamList = {
 }
 
 export type AccountTabStackScreenProps<Screen extends keyof AccountTabStackParamList> = NativeStackScreenProps<AccountTabStackParamList, Screen>
+
+export type Account = {
+  id: number;
+  username: string;
+}
