@@ -1,6 +1,8 @@
-from audiobyte import create_app
+from fastapi import FastAPI
 
-app = create_app()
+app = FastAPI()
 
-if __name__ == '__main__':
-  app.run()
+
+@app.get("/")
+async def root():
+  return {"message": "hello world"}
