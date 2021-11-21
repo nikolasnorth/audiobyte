@@ -59,12 +59,12 @@ function BottomTabNavigator() {
 
   return (
     <BottomTab.Navigator
-      initialRouteName="DiscoverScreen"
+      initialRouteName="DiscoverTab"
       screenOptions={{
         tabBarActiveTintColor: Colors[colorScheme].tint,
       }}>
       <BottomTab.Screen
-        name="DiscoverScreen"
+        name="DiscoverTab"
         component={DiscoverScreen}
         options={{
           title: "Discover",
@@ -72,7 +72,7 @@ function BottomTabNavigator() {
         }}
       />
       <BottomTab.Screen
-        name="CreateAudioScreen"
+        name="CreateAudioTab"
         component={CreateAudioScreen}
         options={{
           title: "Create",
@@ -80,9 +80,9 @@ function BottomTabNavigator() {
         }}
       />
       <BottomTab.Screen
-        name="AccountScreen"
+        name="AccountTab"
         component={AccountScreen}
-        options={({ navigation }: RootTabScreenProps<"AccountScreen">) => ({
+        options={({ navigation }: RootTabScreenProps<"AccountTab">) => ({
           title: "Account",
           tabBarIcon: ({ color }) => <MaterialIconsTabBarIcon name="account-circle" color={color}/>,
           headerRight: () => (
