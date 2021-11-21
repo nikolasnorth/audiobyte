@@ -3,9 +3,9 @@
  * https://reactnavigation.org/docs/getting-started
  *
  */
-import { FontAwesome, Ionicons } from "@expo/vector-icons";
+import { FontAwesome, Ionicons, MaterialIcons } from "@expo/vector-icons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { NavigationContainer, DefaultTheme, DarkTheme } from "@react-navigation/native";
+import { DarkTheme, DefaultTheme, NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import * as React from "react";
 import { ColorSchemeName, Pressable } from "react-native";
@@ -18,6 +18,7 @@ import AccountScreen from "../screens/AccountScreen";
 import DiscoverScreen from "../screens/DiscoverScreen";
 import { RootStackParamList, RootTabParamList, RootTabScreenProps } from "@types";
 import LinkingConfiguration from "./LinkingConfiguration";
+import CreateAudioScreen from "../screens/CreateAudioScreen";
 
 export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeName }) {
   return (
@@ -67,7 +68,15 @@ function BottomTabNavigator() {
         component={DiscoverScreen}
         options={{
           title: "Discover",
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color}/>,
+          tabBarIcon: ({ color }) => <FontAwesomeTabBarIcon name="search" color={color}/>,
+        }}
+      />
+      <BottomTab.Screen
+        name="CreateAudioScreen"
+        component={CreateAudioScreen}
+        options={{
+          title: "Create",
+          tabBarIcon: ({ color }) => <FontAwesomeTabBarIcon name="microphone" color={color}/>
         }}
       />
       <BottomTab.Screen
@@ -75,7 +84,7 @@ function BottomTabNavigator() {
         component={AccountScreen}
         options={({ navigation }: RootTabScreenProps<"AccountScreen">) => ({
           title: "Account",
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color}/>,
+          tabBarIcon: ({ color }) => <MaterialIconsTabBarIcon name="account-circle" color={color}/>,
           headerRight: () => (
             <Pressable
               onPress={() => navigation.navigate("Modal")}
@@ -99,9 +108,16 @@ function BottomTabNavigator() {
 /**
  * You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
  */
-function TabBarIcon(props: {
+function FontAwesomeTabBarIcon(props: {
   name: React.ComponentProps<typeof FontAwesome>["name"];
   color: string;
 }) {
   return <FontAwesome size={30} style={{ marginBottom: -3 }} {...props} />;
+}
+
+function MaterialIconsTabBarIcon(props: {
+  name: React.ComponentProps<typeof MaterialIcons>["name"];
+  color: string;
+}) {
+  return <MaterialIcons size={30} style={{ marginBottom: -3 }} {...props} />;
 }
