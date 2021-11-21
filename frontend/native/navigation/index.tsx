@@ -3,7 +3,7 @@
  * https://reactnavigation.org/docs/getting-started
  *
  */
-import { FontAwesome } from "@expo/vector-icons";
+import { FontAwesome, Ionicons } from "@expo/vector-icons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer, DefaultTheme, DarkTheme } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -14,8 +14,8 @@ import Colors from "../constants/Colors";
 import useColorScheme from "../hooks/useColorScheme";
 import ModalScreen from "../screens/ModalScreen";
 import NotFoundScreen from "../screens/NotFoundScreen";
-import TabOneScreen from "../screens/TabOneScreen";
-import TabTwoScreen from "../screens/TabTwoScreen";
+import AccountScreen from "../screens/AccountScreen";
+import DiscoverScreen from "../screens/DiscoverScreen";
 import { RootStackParamList, RootTabParamList, RootTabScreenProps } from "@types";
 import LinkingConfiguration from "./LinkingConfiguration";
 
@@ -58,15 +58,23 @@ function BottomTabNavigator() {
 
   return (
     <BottomTab.Navigator
-      initialRouteName="TabOne"
+      initialRouteName="DiscoverScreen"
       screenOptions={{
         tabBarActiveTintColor: Colors[colorScheme].tint,
       }}>
       <BottomTab.Screen
-        name="TabOne"
-        component={TabOneScreen}
-        options={({ navigation }: RootTabScreenProps<"TabOne">) => ({
-          title: "Tab One",
+        name="DiscoverScreen"
+        component={DiscoverScreen}
+        options={{
+          title: "Discover",
+          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color}/>,
+        }}
+      />
+      <BottomTab.Screen
+        name="AccountScreen"
+        component={AccountScreen}
+        options={({ navigation }: RootTabScreenProps<"AccountScreen">) => ({
+          title: "Account",
           tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color}/>,
           headerRight: () => (
             <Pressable
@@ -74,8 +82,8 @@ function BottomTabNavigator() {
               style={({ pressed }) => ({
                 opacity: pressed ? 0.5 : 1,
               })}>
-              <FontAwesome
-                name="info-circle"
+              <Ionicons
+                name="ios-settings-outline"
                 size={25}
                 color={Colors[colorScheme].text}
                 style={{ marginRight: 15 }}
@@ -83,14 +91,6 @@ function BottomTabNavigator() {
             </Pressable>
           ),
         })}
-      />
-      <BottomTab.Screen
-        name="TabTwo"
-        component={TabTwoScreen}
-        options={{
-          title: "Tab Two",
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color}/>,
-        }}
       />
     </BottomTab.Navigator>
   );
